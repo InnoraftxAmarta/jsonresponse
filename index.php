@@ -15,7 +15,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $client = new GuzzleHttp\Client;
 
-for($i=15;$i>=12;$i--){
+for($i=15;$i>=0;$i--){
 
 $response = $client->request("GET","https://ir-dev-d9.innoraft-sites.com/jsonapi/node/services");
 
@@ -37,7 +37,7 @@ $title = $res->data[$i]->attributes->field_secondary_title->value;
 $dataword = $res->data[$i]->attributes->field_services->value;
 
 $img = "https://ir-dev-d9.innoraft-sites.com".$imgres->data->attributes->uri->url;
-
+if($title!=NULL){
 if($i%2!=0){
 
     ?>
@@ -84,7 +84,7 @@ else{
 
 <?php
 }
-}
+}}
 ?>
 </body>
 </html>
