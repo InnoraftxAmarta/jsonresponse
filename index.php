@@ -23,24 +23,14 @@ $res = $response->getBody();
 
 $res = json_decode($res);
 
-// var_dump($res);
-
 $data = $res->data[$i]->relationships->field_image->links->related->href;
 
-// $client = new Client(['base_uri' => 'https://ir-dev-d9.innoraft-sites.com/jsonapi/node/services']);
-
-// var_dump($data);
-
-// echo $data;
-
-$image = $client->request("GET","$data");
+$image = $client->request("GET",$data);
 
 $imgres = $image->getBody();
 
 
 $imgres = json_decode($imgres);
-
-// var_dump($imgres);
 
 $title = $res->data[$i]->attributes->field_secondary_title->value;
 
@@ -48,61 +38,52 @@ $dataword = $res->data[$i]->attributes->field_services->value;
 
 $img = "https://ir-dev-d9.innoraft-sites.com".$imgres->data->attributes->uri->url;
 
-// var_dump($img);
-
-// echo $img;
-
 if($i%2!=0){
 
-echo "<div class='row flex-row g-0 justify-content-center'>";
+    ?>
+<div class='row flex-row g-0 justify-content-center'>
 
-echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>";
+<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>
 
-echo "<img class='image img-fluid' src='$img'>";
+<img class='image img-fluid' src='<?php echo $img; ?>'>
 
-echo "</div>";
+</div>
     
-echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>";
+<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>
 
-echo "<div class='right text-break'>$title</div>";
+<div class='right text-break'><?php echo $title; ?></div>
 
 
-echo "<div class='para text-break'>$dataword</div>";
+<div class='para text-break'><?php echo $dataword; ?></div>
 
-echo "</div>";
+</div>
 
-echo "</div>";
+</div>
 
- 
+ <?php
 }
 else{
-    echo "<div class='row flex-row-reverse flex-row g-0 justify-content-center'>";
+    ?>
+<div class='row flex-row-reverse flex-row g-0 justify-content-center'>
 
-    echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>";
+<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>
     
-    echo "<img class='image img-fluid' src='$img'>";
+ <img class='image img-fluid' src='<?php echo $img; ?>'>
     
-    echo "</div>";
+</div>
         
-    echo "<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>";
+<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4 image'>
     
-    echo "<div class='right text-break'>$title</div>";
+<div class='right text-break'><?php echo $title; ?></div>
     
+<div class='para text-break'><?php echo $dataword; ?></div>
     
-    echo "<div class='para text-break'>$dataword</div>";
+</div>
     
-    echo "</div>";
-    
-    echo "</div>";
+</div>
 
+<?php
 }
-
-
-// echo $response->getStatusCode(), "\n";
-
-// $arr = json_decode($response->getBody());
-
-// echo $arr;
 }
 ?>
 </body>
