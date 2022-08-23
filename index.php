@@ -14,15 +14,16 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $client = new GuzzleHttp\Client;
+$i=0;
 
-for ($i = 15; $i >= 0; $i--) {
 
     $response = $client->request("GET", "https://ir-dev-d9.innoraft-sites.com/jsonapi/node/services");
 
     $res = $response->getBody();
 
-    $res = json_decode($res);
 
+    $res = json_decode($res);
+    while($res->data[$i!=NULL]) {
     $data = $res->data[$i]->relationships->field_image->links->related->href;
 
     $image = $client->request("GET", $data);
@@ -37,7 +38,7 @@ for ($i = 15; $i >= 0; $i--) {
 
     $img = "https://ir-dev-d9.innoraft-sites.com" . $imgres->data->attributes->uri->url;
     if ($title != null) {
-        if ($i % 2 != 0) {
+        if ($i % 2 == 0) {
 
             ?>
             <div class='row flex-row g-0 justify-content-center'>
@@ -83,6 +84,7 @@ for ($i = 15; $i >= 0; $i--) {
     <?php
             }
     }
+    $i++;
 }
     ?>
 </body>
