@@ -23,13 +23,13 @@ $i=0;
 
 
     $res = json_decode($res);
-    while($res->data[$i!=NULL]) {
+    while($res->data[$i]!=NULL) {
     $data = $res->data[$i]->relationships->field_image->links->related->href;
 
     $image = $client->request("GET", $data);
 
     $imgres = $image->getBody();
-
+    if($imgres != NULL){
     $imgres = json_decode($imgres);
 
     $title = $res->data[$i]->attributes->field_secondary_title->value;
@@ -82,6 +82,7 @@ $i=0;
             </div>
 
     <?php
+        }
             }
     }
     $i++;
